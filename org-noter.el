@@ -360,11 +360,14 @@ The title used will be the default one."
               document
             (make-indirect-buffer document document-buffer-name t)))
 
-         (notes-buffer
-          (make-indirect-buffer
-           (or (buffer-base-buffer) (current-buffer))
-           (generate-new-buffer-name (concat "Notes of " display-name)) t))
-
+         ;; I don't want an indirect note buffer just use the real thing!
+         ;; Original:
+         ;; (notes-buffer
+         ;;  (make-indirect-buffer
+         ;;   (or (buffer-base-buffer) (current-buffer))
+         ;;   (generate-new-buffer-name (concat "Notes of " display-name)) t))
+         (notes-buffer (or (buffer-base-buffer) (current-buffer)))
+         
          (session
           (make-org-noter--session
            :id (org-noter--get-new-id)
